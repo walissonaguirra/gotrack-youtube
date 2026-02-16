@@ -85,6 +85,7 @@ onMounted(async () => {
 
       <ChapterView
         v-else-if="view === 'chapter' && activeChapter"
+        :key="activeChapter.number"
         :chapter="activeChapter"
         :is-locked="isChapterLocked"
         @toggle-lesson="toggleLesson"
