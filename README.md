@@ -314,3 +314,9 @@ cd frontend && npm run build && cd .. && go build -o gotrack && ./gotrack
 ```
 
 O dev server do Vite (`npm run dev`) e util para iterar rapidamente no frontend, mas as funcoes `window.go*` so estao disponiveis quando executado dentro do webview via o binario Go.
+
+---
+
+Este projeto está licenciado sob a
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![License: CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
