@@ -1,6 +1,7 @@
 <script setup>
 defineProps({
   lesson: { type: Object, required: true },
+  isWatching: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['toggle', 'watch'])
@@ -9,7 +10,13 @@ const emit = defineEmits(['toggle', 'watch'])
 <template>
   <div
     class="flex items-center gap-3.5 px-4 py-3.5 border rounded-lg transition-all duration-200 cursor-pointer"
-    :class="lesson.completed ? 'border-success bg-green-50' : 'border-border bg-white hover:border-primary'"
+    :class="[
+      isWatching
+        ? 'border-primary bg-blue-50 ring-2 ring-primary/20'
+        : lesson.completed
+          ? 'border-success bg-green-50'
+          : 'border-border bg-white hover:border-primary'
+    ]"
   >
     <div
       class="w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center shrink-0"
