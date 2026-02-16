@@ -41,7 +41,7 @@ function closePlayer() {
 </script>
 
 <template>
-  <!-- Locked state -->
+  <!-- Estado bloqueado -->
   <div v-if="isLocked" class="flex flex-col items-center justify-center py-16 text-center">
     <div class="w-16 h-16 text-secondary mb-4">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -55,7 +55,7 @@ function closePlayer() {
     </p>
   </div>
 
-  <!-- Unlocked state -->
+  <!-- Estado desbloqueado -->
   <div v-else>
     <div class="mb-8">
       <h2 class="text-[28px] font-bold text-dark">Cap. {{ chapter.number }} - {{ chapter.title }}</h2>

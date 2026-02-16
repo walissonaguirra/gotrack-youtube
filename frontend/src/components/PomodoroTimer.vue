@@ -25,7 +25,7 @@ const {
       ? 'bg-white border border-border rounded-xl px-4 py-3 shadow-lg'
       : 'bg-white border border-border rounded-2xl p-5 shadow-lg w-60'"
   >
-    <!-- Minimized -->
+    <!-- Minimizado -->
     <div v-if="minimized" class="flex items-center gap-3">
       <span class="text-[13px] font-semibold text-secondary uppercase tracking-wide">Pomodoro</span>
       <span class="text-[13px] font-bold text-primary tabular-nums">{{ timeDisplay }}</span>
@@ -40,7 +40,7 @@ const {
       </button>
     </div>
 
-    <!-- Expanded -->
+    <!-- Expandido -->
     <template v-else>
       <div class="flex justify-between items-center mb-4">
         <h4 class="text-[13px] font-semibold text-secondary uppercase tracking-wide">Pomodoro</h4>
