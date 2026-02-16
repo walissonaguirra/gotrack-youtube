@@ -9,12 +9,12 @@ import (
 	_ "modernc.org/sqlite"
 )
 
-// DB wraps the sql.DB connection.
+// DB encapsula a conexão sql.DB.
 type DB struct {
 	conn *sql.DB
 }
 
-// New opens (or creates) the SQLite database in the user's config directory.
+// New abre (ou cria) o banco de dados SQLite no diretório de configuração do usuário.
 func New() (*DB, error) {
 	dir, err := os.UserConfigDir()
 	if err != nil {
@@ -39,7 +39,7 @@ func New() (*DB, error) {
 	return db, nil
 }
 
-// Close closes the database connection.
+// Close fecha a conexão com o banco de dados.
 func (db *DB) Close() error {
 	return db.conn.Close()
 }

@@ -6,7 +6,7 @@ import (
 	"gotrack/internal/models"
 )
 
-// SeedLessons inserts lessons that don't already exist in the database.
+// SeedLessons insere aulas que ainda não existem no banco de dados.
 func (db *DB) SeedLessons(lessons []models.Lesson) error {
 	stmt, err := db.conn.Prepare(`
 		INSERT INTO lessons (id, chapter, lesson_number, title, youtube_id, is_exercise)
@@ -35,7 +35,7 @@ func (db *DB) SeedLessons(lessons []models.Lesson) error {
 	return nil
 }
 
-// ToggleLesson toggles the completed status of a lesson, returning the new state.
+// ToggleLesson alterna o status de conclusão de uma aula, retornando o novo estado.
 func (db *DB) ToggleLesson(id string) (bool, error) {
 	var completed int
 	err := db.conn.QueryRow("SELECT completed FROM lessons WHERE id = ?", id).Scan(&completed)
@@ -56,7 +56,7 @@ func (db *DB) ToggleLesson(id string) (bool, error) {
 	return newState == 1, err
 }
 
-// GetLessonCompletions returns a map of lesson ID -> completed status.
+// GetLessonCompletions retorna um mapa de ID da aula -> status de conclusão.
 func (db *DB) GetLessonCompletions() (map[string]bool, error) {
 	rows, err := db.conn.Query("SELECT id, completed FROM lessons")
 	if err != nil {
@@ -76,7 +76,7 @@ func (db *DB) GetLessonCompletions() (map[string]bool, error) {
 	return result, rows.Err()
 }
 
-// IsChapterComplete checks if all lessons in a chapter are completed.
+// IsChapterComplete verifica se todas as aulas de um capítulo foram concluídas.
 func (db *DB) IsChapterComplete(chapter int) (bool, error) {
 	var total, completed int
 	err := db.conn.QueryRow(
@@ -89,7 +89,7 @@ func (db *DB) IsChapterComplete(chapter int) (bool, error) {
 	return total > 0 && total == completed, nil
 }
 
-// SaveTimerSession records a completed pomodoro session.
+// SaveTimerSession registra uma sessão pomodoro concluída.
 func (db *DB) SaveTimerSession(minutes, chapter int) error {
 	_, err := db.conn.Exec(
 		"INSERT INTO timer_sessions (started_at, duration_minutes, chapter) VALUES (?, ?, ?)",
@@ -98,14 +98,14 @@ func (db *DB) SaveTimerSession(minutes, chapter int) error {
 	return err
 }
 
-// GetYouTubeID returns the YouTube ID for a lesson.
+// GetYouTubeID retorna o ID do YouTube para uma aula.
 func (db *DB) GetYouTubeID(lessonID string) (string, error) {
 	var ytID string
 	err := db.conn.QueryRow("SELECT youtube_id FROM lessons WHERE id = ?", lessonID).Scan(&ytID)
 	return ytID, err
 }
 
-// GetStats returns overall progress statistics.
+// GetStats retorna as estatísticas gerais de progresso.
 func (db *DB) GetStats() (models.Stats, error) {
 	var stats models.Stats
 

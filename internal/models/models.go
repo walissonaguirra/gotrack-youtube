@@ -1,6 +1,6 @@
 package models
 
-// Lesson represents a single video lesson in the course.
+// Lesson representa uma aula em vídeo do curso.
 type Lesson struct {
 	ID           string `json:"id"`
 	Chapter      int    `json:"chapter"`
@@ -12,25 +12,25 @@ type Lesson struct {
 	CompletedAt  string `json:"completedAt,omitempty"`
 }
 
-// Chapter groups lessons under a numbered chapter.
+// Chapter agrupa aulas sob um capítulo numerado.
 type Chapter struct {
 	Number     int       `json:"number"`
 	Title      string    `json:"title"`
 	Lessons    []Lesson  `json:"lessons"`
 	IsExercise bool      `json:"isExercise"`
-	RequiredBy int       `json:"requiredBy,omitempty"` // chapter that must be completed first
+	RequiredBy int       `json:"requiredBy,omitempty"` // capítulo que deve ser concluído primeiro
 	Unlocked   bool      `json:"unlocked"`
 	Progress   float64   `json:"progress"` // 0.0 to 1.0
 }
 
-// Module groups chapters into learning stages.
+// Module agrupa capítulos em etapas de aprendizado.
 type Module struct {
 	Name     string    `json:"name"`
 	Chapters []Chapter `json:"chapters"`
 	Progress float64   `json:"progress"`
 }
 
-// TimerSession records a completed pomodoro session.
+// TimerSession registra uma sessão pomodoro concluída.
 type TimerSession struct {
 	ID              int    `json:"id"`
 	StartedAt       string `json:"startedAt"`
@@ -38,7 +38,7 @@ type TimerSession struct {
 	Chapter         int    `json:"chapter,omitempty"`
 }
 
-// Stats holds overall progress statistics.
+// Stats armazena as estatísticas gerais de progresso.
 type Stats struct {
 	TotalLessons     int     `json:"totalLessons"`
 	CompletedLessons int     `json:"completedLessons"`
