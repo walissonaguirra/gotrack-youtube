@@ -11,6 +11,7 @@ const props = defineProps({
 const emit = defineEmits(['toggle-lesson'])
 
 const videoUrl = ref('')
+const watchingLessonId = ref('')
 
 const completedCount = computed(() =>
   props.chapter.lessons.filter(l => l.completed).length
@@ -27,6 +28,7 @@ function onToggle(lessonId) {
 async function onWatch(lessonId) {
   try {
     videoUrl.value = await window.goGetYouTubeURL(lessonId)
+    watchingLessonId.value = lessonId
   } catch (err) {
     console.error('Watch video error:', err)
   }
@@ -34,6 +36,7 @@ async function onWatch(lessonId) {
 
 function closePlayer() {
   videoUrl.value = ''
+  watchingLessonId.value = ''
 }
 </script>
 
@@ -75,6 +78,7 @@ function closePlayer() {
         v-for="lesson in chapter.lessons"
         :key="lesson.id"
         :lesson="lesson"
+        :is-watching="watchingLessonId === lesson.id"
         @toggle="onToggle"
         @watch="onWatch"
       />
