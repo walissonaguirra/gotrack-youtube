@@ -9,17 +9,17 @@ import (
 	"gotrack/internal/models"
 )
 
-// Handler provides the JS bindings for the webview.
+// Handler fornece as vinculações JS para o webview.
 type Handler struct {
 	db *database.DB
 }
 
-// New creates a new Handler with the given database.
+// New cria um novo Handler com o banco de dados fornecido.
 func New(db *database.DB) *Handler {
 	return &Handler{db: db}
 }
 
-// GetModules returns all modules with current progress and unlock status.
+// GetModules retorna todos os módulos com progresso atual e status de desbloqueio.
 func (h *Handler) GetModules() (string, error) {
 	completions, err := h.db.GetLessonCompletions()
 	if err != nil {
@@ -32,7 +32,7 @@ func (h *Handler) GetModules() (string, error) {
 		for ci := range modules[mi].Chapters {
 			ch := &modules[mi].Chapters[ci]
 
-			// Check unlock status
+			// Verifica status de desbloqueio
 			if req, ok := course.ExerciseRequirements[ch.Number]; ok {
 				unlocked, _ := h.db.IsChapterComplete(req)
 				ch.Unlocked = unlocked
@@ -40,7 +40,7 @@ func (h *Handler) GetModules() (string, error) {
 				ch.Unlocked = true
 			}
 
-			// Calculate chapter progress
+			// Calcula o progresso do capítulo
 			var chCompleted int
 			for li := range ch.Lessons {
 				if completions[ch.Lessons[li].ID] {
@@ -64,7 +64,7 @@ func (h *Handler) GetModules() (string, error) {
 	return string(data), err
 }
 
-// ToggleLesson toggles a lesson's completed status and returns updated modules.
+// ToggleLesson alterna o status de conclusão de uma aula e retorna os módulos atualizados.
 func (h *Handler) ToggleLesson(lessonID string) (string, error) {
 	_, err := h.db.ToggleLesson(lessonID)
 	if err != nil {
@@ -73,7 +73,7 @@ func (h *Handler) ToggleLesson(lessonID string) (string, error) {
 	return h.GetModules()
 }
 
-// IsChapterUnlocked checks whether a chapter's exercises are available.
+// IsChapterUnlocked verifica se os exercícios de um capítulo estão disponíveis.
 func (h *Handler) IsChapterUnlocked(chapter int) (bool, error) {
 	req, ok := course.ExerciseRequirements[chapter]
 	if !ok {
@@ -82,12 +82,12 @@ func (h *Handler) IsChapterUnlocked(chapter int) (bool, error) {
 	return h.db.IsChapterComplete(req)
 }
 
-// SaveTimerSession records a completed pomodoro session.
+// SaveTimerSession registra uma sessão pomodoro concluída.
 func (h *Handler) SaveTimerSession(minutes, chapter int) error {
 	return h.db.SaveTimerSession(minutes, chapter)
 }
 
-// GetStats returns overall progress statistics as JSON.
+// GetStats retorna as estatísticas gerais de progresso em JSON.
 func (h *Handler) GetStats() (string, error) {
 	stats, err := h.db.GetStats()
 	if err != nil {
@@ -97,7 +97,7 @@ func (h *Handler) GetStats() (string, error) {
 	return string(data), err
 }
 
-// SeedLessons populates the database with course data.
+// SeedLessons popula o banco de dados com os dados do curso.
 func (h *Handler) SeedLessons() error {
 	chapters := course.AllChapters()
 	var all []models.Lesson
@@ -107,11 +107,11 @@ func (h *Handler) SeedLessons() error {
 	return h.db.SeedLessons(all)
 }
 
-// GetYouTubeURL returns the YouTube embed URL for a lesson.
+// GetYouTubeURL retorna a URL de embed do YouTube para uma aula.
 func (h *Handler) GetYouTubeURL(lessonID string) (string, error) {
 	ytID, err := h.db.GetYouTubeID(lessonID)
 	if err != nil {
-		return "", fmt.Errorf("lesson not found: %w", err)
+		return "", fmt.Errorf("aula não encontrada: %w", err)
 	}
 	return "https://www.youtube.com/embed/" + ytID, nil
 }
