@@ -20,21 +20,22 @@ func New() (*DB, error) {
 	if err != nil {
 		dir = "."
 	}
+
 	dbDir := filepath.Join(dir, "gotrack")
 	if err := os.MkdirAll(dbDir, 0o755); err != nil {
-		return nil, fmt.Errorf("creating db dir: %w", err)
+		return nil, fmt.Errorf("erro ao criar diretório do banco: %w", err)
 	}
 
 	dbPath := filepath.Join(dbDir, "gotrack.db")
 	conn, err := sql.Open("sqlite", dbPath)
 	if err != nil {
-		return nil, fmt.Errorf("opening database: %w", err)
+		return nil, fmt.Errorf("erro ao abrir banco de dados: %w", err)
 	}
 
 	db := &DB{conn: conn}
 	if err := db.migrate(); err != nil {
 		conn.Close()
-		return nil, fmt.Errorf("running migrations: %w", err)
+		return nil, fmt.Errorf("erro ao executar migrações: %w", err)
 	}
 	return db, nil
 }
@@ -69,5 +70,6 @@ func (db *DB) migrate() error {
 			return err
 		}
 	}
+
 	return nil
 }
