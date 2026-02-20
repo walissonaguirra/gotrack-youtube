@@ -4,7 +4,6 @@
 ![Vite](https://img.shields.io/badge/Vite-6.3+-646CFF?logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1+-06B6D4?logo=tailwindcss&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-≥18-339933?logo=nodedotjs&logoColor=white)
-![License](https://img.shields.io/badge/Licença-MIT-blue)
 
 Interface do GoTrack construída como uma **SPA (Single Page Application)** com Vue.js 3, utilizando Composition API, Single File Components (`.vue`) e Tailwind CSS v4.
 
