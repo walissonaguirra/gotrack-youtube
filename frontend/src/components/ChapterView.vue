@@ -58,15 +58,15 @@ function closePlayer() {
   <!-- Estado desbloqueado -->
   <div v-else>
     <div class="mb-8">
-      <h2 class="text-[28px] font-bold text-dark">Cap. {{ chapter.number }} - {{ chapter.title }}</h2>
-      <div class="text-[13px] text-secondary mt-1">
+      <h2 class="text-[28px] font-bold text-dark dark:text-gray-100">Cap. {{ chapter.number }} - {{ chapter.title }}</h2>
+      <div class="text-[13px] text-secondary dark:text-gray-400 mt-1">
         {{ completedCount }} de {{ chapter.lessons.length }} aulas completas ({{ progress }}%)
       </div>
     </div>
 
     <VideoPlayer :url="videoUrl" @close="closePlayer" />
 
-    <div class="h-1 bg-gray-200 rounded-full overflow-hidden mb-6">
+    <div class="h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-6">
       <div
         class="h-full bg-primary rounded-full transition-all duration-400"
         :style="{ width: progress + '%' }"

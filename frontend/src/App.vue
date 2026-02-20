@@ -10,6 +10,18 @@ const currentChapter = ref(0)
 const stats = ref({ progress: 0, completedLessons: 0, totalLessons: 0, totalMinutes: 0 })
 const view = ref('loading')
 
+const isDark = ref(localStorage.getItem('theme') === 'dark')
+
+function applyTheme() {
+  document.documentElement.classList.toggle('dark', isDark.value)
+}
+
+function toggleDark() {
+  isDark.value = !isDark.value
+  localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
+  applyTheme()
+}
+
 const activeChapter = computed(() => {
   for (const mod of modules.value) {
     for (const ch of mod.chapters) {
@@ -55,6 +67,7 @@ function getCurrentChapter() {
 }
 
 onMounted(async () => {
+  applyTheme()
   try {
     await loadModules()
     await showDashboard()
@@ -68,12 +81,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="bg-light text-dark min-h-screen flex font-['Segoe_UI',system-ui,-apple-system,sans-serif]">
+  <div class="bg-light dark:bg-gray-900 text-dark dark:text-gray-100 min-h-screen flex font-['Segoe_UI',system-ui,-apple-system,sans-serif]">
     <AppSidebar
       :modules="modules"
       :active-chapter="currentChapter"
+      :is-dark="isDark"
       @navigate="navigateToChapter"
       @show-dashboard="showDashboard"
+      @toggle-dark="toggleDark"
     />
 
     <main class="flex-1 px-10 py-8 overflow-y-auto h-screen">

@@ -22,15 +22,15 @@ const {
   <div
     class="fixed bottom-6 right-6 z-50"
     :class="minimized
-      ? 'bg-white border border-border rounded-xl px-4 py-3 shadow-lg'
-      : 'bg-white border border-border rounded-2xl p-5 shadow-lg w-60'"
+      ? 'bg-white dark:bg-gray-800 border border-border dark:border-gray-700 rounded-xl px-4 py-3 shadow-lg'
+      : 'bg-white dark:bg-gray-800 border border-border dark:border-gray-700 rounded-2xl p-5 shadow-lg w-60'"
   >
     <!-- Minimizado -->
     <div v-if="minimized" class="flex items-center gap-3">
-      <span class="text-[13px] font-semibold text-secondary uppercase tracking-wide">Pomodoro</span>
+      <span class="text-[13px] font-semibold text-secondary dark:text-gray-400 uppercase tracking-wide">Pomodoro</span>
       <span class="text-[13px] font-bold text-primary tabular-nums">{{ timeDisplay }}</span>
       <button
-        class="w-6 h-6 flex items-center justify-center text-secondary hover:text-dark rounded transition-colors"
+        class="w-6 h-6 flex items-center justify-center text-secondary dark:text-gray-400 hover:text-dark dark:hover:text-gray-100 rounded transition-colors"
         @click="toggleMinimize"
         title="Expandir"
       >
@@ -43,9 +43,9 @@ const {
     <!-- Expandido -->
     <template v-else>
       <div class="flex justify-between items-center mb-4">
-        <h4 class="text-[13px] font-semibold text-secondary uppercase tracking-wide">Pomodoro</h4>
+        <h4 class="text-[13px] font-semibold text-secondary dark:text-gray-400 uppercase tracking-wide">Pomodoro</h4>
         <button
-          class="w-6 h-6 flex items-center justify-center text-secondary hover:text-dark rounded transition-colors"
+          class="w-6 h-6 flex items-center justify-center text-secondary dark:text-gray-400 hover:text-dark dark:hover:text-gray-100 rounded transition-colors"
           @click="toggleMinimize"
           title="Minimizar"
         >
@@ -56,8 +56,8 @@ const {
       </div>
 
       <div class="text-center mb-4">
-        <div class="text-5xl font-bold text-dark tabular-nums leading-none">{{ timeDisplay }}</div>
-        <div class="text-xs text-secondary mt-1.5">{{ currentMode.label }}</div>
+        <div class="text-5xl font-bold text-dark dark:text-gray-100 tabular-nums leading-none">{{ timeDisplay }}</div>
+        <div class="text-xs text-secondary dark:text-gray-400 mt-1.5">{{ currentMode.label }}</div>
       </div>
 
       <div class="flex gap-1 mb-4">
@@ -67,7 +67,7 @@ const {
           class="flex-1 py-1.5 rounded-md text-[11px] font-medium cursor-pointer transition-all border"
           :class="m.active
             ? 'bg-primary text-white border-primary'
-            : 'bg-white text-secondary border-border hover:border-primary'"
+            : 'bg-white dark:bg-gray-700 text-secondary dark:text-gray-300 border-border dark:border-gray-600 hover:border-primary'"
           @click="setMode(m.key)"
         >
           {{ m.label }} ({{ m.minutes }}m)
@@ -82,7 +82,7 @@ const {
           {{ running ? 'Pausar' : 'Iniciar' }}
         </button>
         <button
-          class="flex-1 py-2.5 rounded-lg text-[13px] font-semibold cursor-pointer transition-all bg-gray-100 text-secondary hover:text-dark"
+          class="flex-1 py-2.5 rounded-lg text-[13px] font-semibold cursor-pointer transition-all bg-gray-100 dark:bg-gray-700 text-secondary dark:text-gray-300 hover:text-dark dark:hover:text-gray-100"
           @click="reset"
         >
           Reset

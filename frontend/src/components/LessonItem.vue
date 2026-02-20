@@ -12,15 +12,15 @@ const emit = defineEmits(['toggle', 'watch'])
     class="flex items-center gap-3.5 px-4 py-3.5 border rounded-lg transition-all duration-200 cursor-pointer"
     :class="[
       isWatching
-        ? 'border-primary bg-blue-50 ring-2 ring-primary/20'
+        ? 'border-primary bg-blue-50 dark:bg-blue-900/20 ring-2 ring-primary/20'
         : lesson.completed
-          ? 'border-success bg-green-50'
-          : 'border-border bg-white hover:border-primary'
+          ? 'border-success bg-green-50 dark:bg-green-900/20'
+          : 'border-border dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary'
     ]"
   >
     <div
       class="w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center shrink-0"
-      :class="lesson.completed ? 'border-success bg-success text-white' : 'border-gray-300'"
+      :class="lesson.completed ? 'border-success bg-success text-white' : 'border-gray-300 dark:border-gray-600'"
       @click="emit('toggle', lesson.id)"
     >
       <svg
@@ -38,8 +38,8 @@ const emit = defineEmits(['toggle', 'watch'])
     </div>
 
     <div class="flex-1 min-w-0 cursor-pointer" @click="emit('toggle', lesson.id)">
-      <div class="text-[11px] text-secondary">Aula {{ lesson.lessonNumber }}</div>
-      <div class="text-sm font-medium truncate text-dark">{{ lesson.title }}</div>
+      <div class="text-[11px] text-secondary dark:text-gray-400">Aula {{ lesson.lessonNumber }}</div>
+      <div class="text-sm font-medium truncate text-dark dark:text-gray-100">{{ lesson.title }}</div>
     </div>
 
     <button
