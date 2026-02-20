@@ -1,19 +1,20 @@
 # GoTrack
 
 [![Go](https://img.shields.io/badge/Go-1.25-00ADD8?style=flat&logo=go&logoColor=white)](https://go.dev/)
-[![Vue.js](https://img.shields.io/badge/Vue.js-3-4FC08D?style=flat&logo=vuedotjs&logoColor=white)](https://vuejs.org/)
-[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=flat&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-blue)]()
+[![Platform](https://img.shields.io/badge/Platform-Linux-blue)]()
 
-Painel de aprendizado desktop para acompanhar seu progresso no curso **[Aprenda Go](https://youtube.com/playlist?list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg)** do YouTube. Construído em Go + Vue.js + SQLite.
+Painel de aprendizado desktop para acompanhar seu progresso no curso [Aprenda Go](https://youtube.com/playlist?list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg) do YouTube. Construído em Go + Vue.js + SQLite.
 
 <!-- Adicione aqui um screenshot ou GIF da aplicação -->
-<!-- ![GoTrack Demo](./assets/demo.gif) -->
+|GoTrack Screenshot|
+|:---:|
+|![GoTrack Screenshot](https://github.com/user-attachments/assets/ebe7a753-a80c-4824-a8a6-35551d5ce212)|
+
 
 ## Visão geral
 
-Feito para devs que estão aprendendo ou migrando para a linguagem Go. O curso **Aprenda Go** foi criado por **[Ellen Korbes](https://ellenkorbes.com/)** — Google Developer Expert em Go, CNCF Ambassador e responsável pelo curso mais completo de Go em português. O curso era originalmente pago, mas hoje está disponível gratuitamente no YouTube.
+Feito para devs que estão aprendendo ou migrando para a linguagem Go. O curso **Aprenda Go** foi criado por [Ellen Korbes](https://gotocph.com/2018/speakers/639/ellen-koerbes) — Google Developer Expert em Go, CNCF Ambassador e responsável pelo curso mais completo de Go em português. O curso era originalmente pago, mas hoje está disponível gratuitamente no YouTube.
 
 
 #### Estrutura do curso
@@ -105,14 +106,12 @@ gotrack-youtube-refactor/
 
 ```mermaid
 graph TD
-    subgraph Binário Go
-        DIST["frontend/dist/<br>(arquivos estáticos)"] -->|embed.FS| FRONTEND["Frontend<br>(Vue SPA)"]
-        FRONTEND -->|"webview.Bind()<br>chamadas JS → Go"| HANDLERS[Handlers]
-        HANDLERS --> DB["Database<br>(SQLite)"]
-        HANDLERS --> COURSE["Course<br>(dados hard-coded)"]
-        HTTP["HTTP Server<br>(127.0.0.1:porta efêmera)"] -->|"http.FileServer"| FRONTEND
-        WEBVIEW["Webview<br>(janela nativa)"] -->|"navega para<br>servidor local"| HTTP
-    end
+    DIST["frontend/dist/<br>(arquivos estáticos)"] -->|embed.FS| FRONTEND["Frontend<br>(Vue SPA)"]
+    FRONTEND -->|"webview.Bind()<br>chamadas JS → Go"| HANDLERS[Handlers]
+    HANDLERS --> DB["Database<br>(SQLite)"]
+    HANDLERS --> COURSE["Course<br>(dados hard-coded)"]
+    HTTP["HTTP Server<br>(127.0.0.1:porta efêmera)"] -->|"http.FileServer"| FRONTEND
+    WEBVIEW["Webview<br>(janela nativa)"] -->|"navega para<br>servidor local"| HTTP
 ```
 
 1. O `main.go` inicializa o banco, popula os dados do curso, embarca os arquivos do frontend e inicia um servidor HTTP local
